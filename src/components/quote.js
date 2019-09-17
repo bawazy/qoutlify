@@ -15,10 +15,10 @@ export class quote extends Component {
     render() {
         return (
             <div>
-                
+                <h1>THIS IS WHERE THE QUOTES GOO!!!</h1>
             </div>
         )
     }
 }
 
-export default quote
+export default quote;

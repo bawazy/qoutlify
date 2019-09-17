@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {BrowserRouter as Router,Route,Link} from 'react-router-dom';
+import {BrowserRouter as Router,Route} from 'react-router-dom';
 import Search from './components/search';
 import Favorite from './components/favorite';
+import Quote from './components/quote';
 import Nav from './layouts/nav';
 import './App.css';
 
@@ -19,7 +20,7 @@ class App extends Component{
                   }}
                   >QUOTLIFY</header>
             <Nav />
-            <Route exact path="/" component={App} />
+            <Route exact path="/" component={Quote} />
             <Route path="/search" component={Search} />
             <Route path="/favorite" component={Favorite} />
           </div>
