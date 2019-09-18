@@ -16,7 +16,8 @@ class App extends Component{
                   backgroundColor:'#26A69A', 
                   color:'#fff', 
                   padding:'20px',
-                  fontSize:'2.5rem'
+                  fontSize:'2.5rem',
+                  textAlign:"center"
                   }}
                   >QUOTLIFY</header>
             <Nav />

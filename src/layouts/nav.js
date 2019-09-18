@@ -16,7 +16,7 @@ class nav extends Component {
 
   render() {
     return (
-      <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal">
+      <Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" style={{textAlign:"center"}}>
         <Menu.Item key="mail" style={{fontSize:'1.8rem'}}>
         <Link to={'/'}>
           <Icon type="home" style={{fontSize:'1.8rem'}}/>
