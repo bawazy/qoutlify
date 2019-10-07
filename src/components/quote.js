@@ -1,56 +1,52 @@
 import React, { Component } from 'react'
 import { Icon } from 'antd';
+import axios from 'axios';
 
 
 
 export class quote extends Component {
     constructor(props){
         super(props);
-        // this.handleClick = this.handleClick.bind(this);
+        this.handleClick = this.handleClick.bind(this);
         this.state={
-            qoutes:[
-             {
-                 id:1,
-                quote:'the World is a very funny place it kicks you when you are down but staying down is not an option',
-                author:'Hayatu B. Waziri'
-            },
-            {
-                id:2,
-                quote:'the World is a very funny place it kicks you when you are down but staying down is not an option',
-                author:'Hayatu B. Waziri'
-            },
-            {
-                id:3,
-                quote:'the World is a very funny place it kicks you when you are down but staying down is not an option',
-                author:'Hayatu B. Waziri'
-            },
-            {
-                id:4,
-                quote:'the World is a very funny place it kicks you when you are down but staying down is not an option',
-                author:'Hayatu B. Waziri'
-            },
-        ]
+            count:0,
+            qoutes:[]
         }   
 
     }
+   handleClick(e){
+                let {count} = this.state;
+                    this.setState({
+                        count:count + 1
+                    })
+            console.log(count);
+            }
 
-    handleClick(e){
-        
-       
-       console.log(e);
-    }
+            componentDidMount(){
+                let apiKey ='ceb1c8707db65bfebcd68697c369183d';
+                axios.get('https://favqs.com/api/quotes/',{headers:{Authorization:`Bearer ${apiKey}`}})
+                .then(res=>{
+                    console.log(res.data.quotes)
+                    this.setState({
+                        qoutes:res.data.quotes
+                });
+            })}
 
 
     render() {
+        let {count, qoutes }=this.state;
+        // const rand = quotes[Math.floor(Math.random() * quotes.length)];
+
+        const dispQ = qoutes.map(quote=>{
+                        return <div key={quote.id}><p>"{quote.body}"</p> 
+                                    <h2>--{quote.author}</h2> 
+                               </div>
+                    })
+                    console.log(this.state.qoutes);
         return (
             <div style={{textAlign:"center",width:"30%",display:"block",marginLeft:"auto",marginRight:"auto" }}>
                 
-                {
-                <div>
-                    <p>"{this.state.qoutes[0].quote}"</p>  
-                    <h5>--{this.state.qoutes[0].author}</h5>
-                 </div> 
-                }
+                {dispQ}
 
                 
                 <button><Icon type="sync" onClick={this.handleClick}/></button>  
