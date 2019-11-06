@@ -6,6 +6,9 @@ import Quote from './components/quote';
 import Nav from './layouts/nav';
 import './App.css';
 
+
+
+
 class App extends Component{
   render() {
   return (

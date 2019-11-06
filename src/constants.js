@@ -1,0 +1,6 @@
+export const QUOTES_PENDING ='QUOTES_PENDING';
+export const QUOTES_SUCCESS ='QUOTES_SUCCESS';
+export const QUOTES_FAILED ='QUOTES_FAILED';
+
+
+

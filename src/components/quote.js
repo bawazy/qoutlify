@@ -1,8 +1,20 @@
 import React, { Component } from 'react'
 import { Icon } from 'antd';
-import axios from 'axios';
+import {connect} from 'react-redux'
+import {getQoutes} from '../actions'
 
+const mapStateToProps= state =>{
+    return {
+        loading:state.loading,
+        quotes:state.quotes
+    }
+}
 
+const mapDispatchToProps=dispatch=>{
+    return {
+    onRequestQuotes:()=>dispatch(getQoutes())
+    }
+}
 
 export class quote extends Component {
     constructor(props){
@@ -10,7 +22,6 @@ export class quote extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.state={
             count:0,
-            qoutes:[]
         }   
 
     }
@@ -23,34 +34,29 @@ export class quote extends Component {
             }
 
             componentDidMount(){
-                let apiKey ='ceb1c8707db65bfebcd68697c369183d';
-                axios.get('https://favqs.com/api/quotes/',{headers:{Authorization:`Bearer ${apiKey}`}})
-                .then(res=>{
-                    console.log(res.data.quotes)
-                    this.setState({
-                        qoutes:res.data.quotes
-                });
-            })}
+                    this.props.onRequestQuotes();
+           
+            }
 
 
     render() {
-        let {count, qoutes }=this.state;
-        const rand = Math.floor(Math.random() * qoutes.length);
+        let {count}=this.state;
+        let {quotes,loading}=this.props;
+        const rand = Math.floor(Math.random() * quotes.length);
 
-        const dispQ = qoutes.map(quote=>{
+        const dispQ = quotes.map(quote=>{
                         return <div key={quote.id}><p><span>"</span>{quote.body}<span>"</span></p> 
                                     <h2>--{quote.author}</h2> 
                                </div>
                     })
-                    console.log(this.state.qoutes);
-        return (
+                  
+        return !quotes.length ? <h2 style={{textAlign:'center'}}>Loading......</h2>
+        :(
             <div style={{textAlign:"center",width:"30%",display:"block",marginLeft:"auto",marginRight:"auto" }}>
                 
                {<div>
-                   {/* <h4>{qoutes[rand].body}</h4>
-                    <h2>{qoutes[rand].author}</h2> */}
                     {dispQ[rand]}
-                    </div>
+                </div>
                }
 
                 <button><Icon type="sync" onClick={this.handleClick}/></button>  
@@ -60,4 +66,4 @@ export class quote extends Component {
     }
 }
 
-export default quote;
+export default connect(mapStateToProps,mapDispatchToProps)(quote);
